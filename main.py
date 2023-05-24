@@ -89,3 +89,4 @@ for row in range(size[1]):
             os.system(command)
         commit_date += dt.timedelta(days=7)
     commit_date -= dt.timedelta(days=7 * 51 - 1)
+print('Commits were generated. You can push them to your empty GitHub repository')
