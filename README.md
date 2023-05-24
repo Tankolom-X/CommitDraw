@@ -2,8 +2,8 @@
 **Allows you to convert your image to the activity on your GitHub heatmap**
 
 The image that was provided:
-![example](https://github.com/Tankolom-X/commit-draw/blob/main/media/example.png?raw=True "example")
-From the left to right: turtle, hedgehog, mushroom, smile, penguin
+![example](https://github.com/Tankolom-X/commit-draw/blob/main/media/example.png?raw=True "example") \
+From left to right: turtle, hedgehog, mushroom, smile, penguin
 
 The result:
 ![result](https://github.com/Tankolom-X/commit-draw/blob/main/media/result.png?raw=True "result")
@@ -25,13 +25,14 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
 ### How to use?
 1. Execute ```git clone https://github.com/Tankolom-X/commit-draw.git```
 2. Launch the `commit-draw.exe`
-3. In the dialog menu select the picture which you want to transform<br>
-   **Pay attention! For the best result the picture should be _51x7_ pixels**
+3. In the dialog menu select the picture which you want to transform
+   > **Note**
+   > For the best result the picture should be _51x7_ pixels
 4. In the next dialog menu create or select an empty directory for the result of the program 
 5. In the opened console insert the year you want to paint
 6. Wait until the program will finish and close
 7. In GitHub create a new repository
-8. Push the repository on your PC with commits from the command line to the GitHub's repository using: <br>
+8. Push the repository on your PC with commits from the command line to the GitHub's repository using:
     ```
    git remote add origin https://github.com/[username]/[repositoryName]
     ```
@@ -42,6 +43,9 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
    git push -u origin main
     ```
 9. Wait. GitHub will update your contribution heatmap soon
+
+> **Warning**
+> The years you used to draw cannot be removed from the activity on GitHub
 
 ### Selecting the picture
 
