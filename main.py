@@ -73,7 +73,6 @@ if os.path.isfile('commits_file.txt'):
 if os.path.isdir('.git'):
     rmtree('.git')
 
-os.system('type nul > commits_file.txt')
 os.system('git init')
 os.system('git add commits_file.txt')
 

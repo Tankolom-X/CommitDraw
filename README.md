@@ -23,8 +23,21 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
 
 
 ### How to use?
-1. Execute ```git clone https://github.com/Tankolom-X/commit-draw.git```
-2. Launch the `commit-draw.exe`
+1. Execute `git clone https://github.com/Tankolom-X/commit-draw.git`
+2. Launch the executable file for your OS or run from source following the instructions:
+    
+   Make sure you have an actual version of pip 
+   ```bash
+pip install --upgrade pip 
+   ```
+   Then install required dependencies: *Pillow*, *GitPython* and *tkinter*
+   ```bash
+pip install -r requirements.txt 
+   ```
+   > **Note**
+   > Linux and Mac users may be forced to install *tkinter* via their distribution's package managers'
+
+
 3. In the dialog menu select the picture which you want to transform
    > **Note**
    > For the best result the picture should be _51x7_ pixels
