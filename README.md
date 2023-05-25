@@ -1,7 +1,5 @@
 # Commit Draw
 
---- 
-
 **Allows you to convert your image to the activity on your GitHub heatmap**
 
 The image that was provided:
@@ -79,4 +77,4 @@ Your picture should be **_51x7_ pixels**. Otherwise, the result may be blurred.
 White color means no activity(Empty cell on your GitHub heatmap).\
 The darker the color of your image the darker the color of the cell on your GitHub heatmap.
 
-Examples you can find here https://github.com/Tankolom-X/commit-draw/tree/main/samples
+Examples you can find here: https://github.com/Tankolom-X/commit-draw/tree/main/samples
