@@ -18,7 +18,7 @@ year = int(input('Year for commits:\n'))
 if not year:
     exit()
 
-size = (51, 7)
+SIZE = (51, 7)
 colors_amount = 4
 
 
@@ -26,13 +26,13 @@ def get_commits(image_path):
     global colors_amount
 
     im = Image.open(image_path)
-    if im.size != size:
-        im = im.resize(size)
+    if im.size != SIZE:
+        im = im.resize(SIZE)
 
     im = im.convert('L')
     pixels = im.load()
-    for i in range(size[0]):
-        for j in range(size[1]):
+    for i in range(SIZE[0]):
+        for j in range(SIZE[1]):
             if pixels[i, j] == 255:
                 colors_amount = 5
                 break
@@ -49,9 +49,9 @@ def get_commits(image_path):
     max_color = len(result.getcolors()) - 1
     pixels = result.load()
     colors = list()
-    for i in range(size[0]):
+    for i in range(SIZE[0]):
         line = list()
-        for j in range(size[1]):
+        for j in range(SIZE[1]):
             line.append(4 if pixels[i, j] == max_color else pixels[i, j])
         colors.append(line)
 
@@ -72,22 +72,23 @@ def first_date(year):
     return date
 
 
+def prepare_for_commit(directory_path):
+    os.chdir(directory_path)
+    if os.path.isfile('commits_file.txt'):
+        os.remove('commits_file.txt')
+    if os.path.isdir('.git'):
+        rmtree('.git')
+    os.system('git init')
+
+
+prepare_for_commit(directory)
 pixels_colors = get_commits(path_to_image)
 commit_date = first_date(year)
 
-os.chdir(directory)
-if os.path.isfile('commits_file.txt'):
-    os.remove('commits_file.txt')
-if os.path.isdir('.git'):
-    rmtree('.git')
-
-os.system('git init')
-os.system('git add commits_file.txt')
-
 k = 1 if colors_amount == 4 else 0
-for row in range(size[1]):
-    for col in range(size[0]):
-        for _ in range(pixels_colors[col][row] + k):
+for row in range(SIZE[1]):
+    for col in range(SIZE[0]):
+        for i in range(pixels_colors[col][row] + k):
             f = open('commits_file.txt', 'a')
             f.write('0')
             f.close()
