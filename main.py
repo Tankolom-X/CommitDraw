@@ -93,7 +93,7 @@ for row in range(SIZE[1]):
             f.write('0')
             f.close()
             os.system('git add commits_file.txt')
-            command = f'git commit -m \'commit\' --no-edit --date=\"{commit_date}\"'
+            command = f'git commit -m \"{commit_date.date()} {i+1}\" --no-edit --date=\"{commit_date}\"'
             os.system(command)
         commit_date += dt.timedelta(days=7)
     commit_date -= dt.timedelta(days=7 * 51 - 1)
