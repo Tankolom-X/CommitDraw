@@ -7,8 +7,16 @@ from tkinter.filedialog import askopenfilename, askdirectory
 
 Tk().withdraw()
 path_to_image = askopenfilename(title='Select an image')
+if not path_to_image:
+    exit()
+
 directory = askdirectory(title='Select a directory')
+if not directory:
+    exit()
+
 year = int(input('Year for commits:\n'))
+if not year:
+    exit()
 
 size = (51, 7)
 colors_amount = 4
