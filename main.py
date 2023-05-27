@@ -5,21 +5,31 @@ from git import rmtree
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename, askdirectory
 
-Tk().withdraw()
-path_to_image = askopenfilename(title='Select an image')
-if not path_to_image:
-    exit()
-
-directory = askdirectory(title='Select a directory')
-if not directory:
-    exit()
-
-year = int(input('Year for commits:\n'))
-if not year:
-    exit()
-
 SIZE = (51, 7)
 colors_amount = 4
+
+
+def modal_image_select():
+    Tk().withdraw()
+    path_to_image = askopenfilename(title='Select an image')
+    if not path_to_image:
+        exit()
+    return path_to_image
+
+
+def modal_directory_select():
+    directory = askdirectory(title='Select a directory')
+    if not directory:
+        exit()
+    return directory
+
+
+def date_select(only_year=True):
+    if only_year:
+        year = int(input('Year for commits:\n'))
+        if not year:
+            exit()
+        return year
 
 
 def get_commits(image_path):
@@ -81,20 +91,27 @@ def prepare_for_commit(directory_path):
     os.system('git init')
 
 
-prepare_for_commit(directory)
-pixels_colors = get_commits(path_to_image)
-commit_date = first_date(year)
+def make_commits(commit_date, commits):
+    k = 1 if colors_amount == 4 else 0
+    for row in range(SIZE[1]):
+        for col in range(SIZE[0]):
+            for i in range(commits[col][row] + k):
+                f = open('commits_file.txt', 'a')
+                f.write('0')
+                f.close()
+                os.system('git add commits_file.txt')
+                command = f'git commit -m \"{commit_date.date()} {i + 1}\" --no-edit --date=\"{commit_date}\"'
+                os.system(command)
+            commit_date += dt.timedelta(days=7)
+        commit_date -= dt.timedelta(days=7 * 51 - 1)
+    print('Commits were generated. You can push them to your empty GitHub repository')
 
-k = 1 if colors_amount == 4 else 0
-for row in range(SIZE[1]):
-    for col in range(SIZE[0]):
-        for i in range(pixels_colors[col][row] + k):
-            f = open('commits_file.txt', 'a')
-            f.write('0')
-            f.close()
-            os.system('git add commits_file.txt')
-            command = f'git commit -m \"{commit_date.date()} {i+1}\" --no-edit --date=\"{commit_date}\"'
-            os.system(command)
-        commit_date += dt.timedelta(days=7)
-    commit_date -= dt.timedelta(days=7 * 51 - 1)
-print('Commits were generated. You can push them to your empty GitHub repository')
+
+path_to_image = modal_image_select()
+directory = modal_directory_select()
+year = date_select()
+
+prepare_for_commit(directory)
+commits = get_commits(path_to_image)
+commit_date = first_date(year)
+make_commits(commit_date, commits)
