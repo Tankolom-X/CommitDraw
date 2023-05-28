@@ -2,7 +2,7 @@ from PIL import Image
 import datetime as dt
 import os
 from git import rmtree
-from tkinter import Tk
+import tkinter as tk
 from tkinter.filedialog import askopenfilename, askdirectory
 
 SIZE = (51, 7)
@@ -10,26 +10,45 @@ colors_amount = 4
 
 
 def modal_image_select():
-    Tk().withdraw()
-    path_to_image = askopenfilename(title='Select an image')
+    root = tk.Tk()
+    root.attributes('-alpha', 0.0)
+    root.attributes('-topmost', True)
+    path_to_image = tk.filedialog.askopenfilename(parent=root, title='Select an image')
+    root.destroy()
     if not path_to_image:
         exit()
     return path_to_image
 
 
 def modal_directory_select():
-    directory = askdirectory(title='Select a directory')
+    input('To select a directory, press enter ')
+    root = tk.Tk()
+    root.attributes('-alpha', 0.0)
+    root.attributes('-topmost', True)
+    directory = tk.filedialog.askdirectory(parent=root, title='Select a directory')
+    root.destroy()
     if not directory:
         exit()
     return directory
 
 
-def date_select(only_year=True):
-    if only_year:
-        year = int(input('Year for commits:\n'))
-        if not year:
-            exit()
-        return year
+def year_select():
+    year = int(input('Year for commits:\n'))
+    if not year:
+        exit()
+    return year
+
+
+def date_select():
+    message = 'Please specify the beginning date in day-month-year format \n'
+    day, month, year = input(message).split('-')
+    beginning = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+
+    message = 'Please specify the ending date in day-month-year format \n'
+    day, month, year = input(message).split('-')
+    ending = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+
+    return beginning, ending
 
 
 def get_commits(image_path):
