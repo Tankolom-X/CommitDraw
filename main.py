@@ -125,6 +125,17 @@ def make_commits(commit_date, commits):
         commit_date -= dt.timedelta(days=7 * 51 - 1)
     print('Commits were generated. You can push them to your empty GitHub repository')
 
+def menu():
+    while True:
+        print('\n' * 2)
+        print('Please select the action')
+        print('1. Convert an image to your GitHub heatmap activity')
+        print('2. Fill you GitHub heatmap activity randomly')
+        index = int(input('Your choice: '))
+        if index in [1, 2]:
+            return index
+        else:
+            print('Choice is incorrect')
 
 path_to_image = modal_image_select()
 directory = modal_directory_select()
