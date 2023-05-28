@@ -4,6 +4,7 @@ import os
 from git import rmtree
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, askdirectory
+from random import randint
 
 SIZE = (51, 7)
 colors_amount = 4
@@ -137,11 +138,40 @@ def menu():
         else:
             print('Choice is incorrect')
 
-path_to_image = modal_image_select()
-directory = modal_directory_select()
-year = date_select()
 
-prepare_for_commit(directory)
-commits = get_commits(path_to_image)
-commit_date = first_date(year)
-make_commits(commit_date, commits)
+index = menu()
+if index == 1:
+    path_to_image = modal_image_select()
+
+    directory = modal_directory_select()
+    year = year_select()
+
+    prepare_for_commit(directory)
+    commits = get_commits(path_to_image)
+    commit_date = first_date(year)
+    make_commits(commit_date, commits)
+
+elif index == 2:
+    directory = modal_directory_select()
+    beginning, ending = date_select()
+    minimal = int(input('Specify the minimal amount of commits \n'))
+    maximal = int(input('Specify the maximal amount of commits \n'))
+
+    prepare_for_commit(directory)
+
+    if beginning == ending:
+        print('Dates are the same')
+        exit()
+
+    commit_date = beginning
+    for _ in range((ending - beginning).days + 1):
+        for i in range(randint(minimal, maximal)):
+            f = open('commits_file.txt', 'a')
+            f.write('0')
+            f.close()
+            os.system('git add commits_file.txt')
+            command = f'git commit -m \"{commit_date.date()} {i + 1}\" --no-edit --date=\"{commit_date}\"'
+            os.system(command)
+        commit_date += dt.timedelta(days=1)
+    print('Commits were generated. You can push them to your empty GitHub repository')
+
