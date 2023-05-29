@@ -132,9 +132,9 @@ def menu():
         print('Please select the action')
         print('1. Convert an image to your GitHub heatmap activity')
         print('2. Fill you GitHub heatmap activity randomly')
-        index = int(input('Your choice: '))
-        if index in [1, 2]:
-            return index
+        index = input('Your choice: ')
+        if index in ['1', '2']:
+            return int(index)
         else:
             print('Choice is incorrect')
 
