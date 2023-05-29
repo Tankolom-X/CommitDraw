@@ -41,12 +41,12 @@ def year_select():
 
 
 def date_select():
-    message = 'Please specify the beginning date in day-month-year format \n'
-    day, month, year = input(message).split('-')
+    message = 'Please specify the beginning date in YYYY-MM-DD format \n'
+    year, month, day = input(message).split('-')
     beginning = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
 
-    message = 'Please specify the ending date in day-month-year format \n'
-    day, month, year = input(message).split('-')
+    message = 'Please specify the ending date in YYYY-MM-DD format \n'
+    year, month, day = input(message).split('-')
     ending = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
 
     return beginning, ending
