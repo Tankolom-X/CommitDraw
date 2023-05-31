@@ -2,11 +2,11 @@
 
 **Allows you to convert your image to the activity on your GitHub heatmap**
 
-The image that was provided:
+The image that was provided:\
 ![example](https://github.com/Tankolom-X/commit-draw/blob/main/media/example.png?raw=True "example") \
 From left to right: turtle, hedgehog, mushroom, smile, penguin
 
-The result:
+The result:\
 ![result](https://github.com/Tankolom-X/commit-draw/blob/main/media/result.png?raw=True "result")
 
 
@@ -15,7 +15,7 @@ based on the git's ability to accept commits _in the past_.**
 
 ---
 
-### How does it work?
+## How does it work?
 `commit-draw` analyzes a picture that you provide to the
 program, then generates and executes a script that makes commits
 for the year you have chosen in the program.
@@ -26,8 +26,8 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
 
 ---
 
-### How to use?
-1. **You can download and launch built program for your os**
+## How to use?
+**You can download and launch built program for your os**
    <table>
       <thead>
          <th>
@@ -96,30 +96,65 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
    + Run main.py
    ```bash
    python main.py
-   ```
-3. **In the dialog menu select the picture which you want to transform**
-   > **Note**
-   > For the best result the picture should be _51x7_ pixels
-4. **In the next dialog menu create or select an empty directory for the result of the program**
-5. **In the opened console insert the year you want to paint**
-6. **Wait until the program will finish and close**
-7. **In GitHub create a new repository**
-8. **Push the repository on your PC with commits from the command line to the GitHub's repository using:**
-    ```
-   git remote add origin https://github.com/[username]/[repositoryName]
-    ```
-    ```
-   git branch -M main
-    ```
-    ```
-   git push -u origin main
-    ```
-9. **Wait. GitHub will update your contribution heatmap soon**
-> 
-> **Warning**
-> The years you used to draw cannot be removed from the activity on GitHub
+   ``` 
 
----
+___
+
+### In the menu select the activity you want to do
+
+#### Convert an image to your GitHub heatmap activity:
+>
+>1. **In the menu select the "Convert an image to your GitHub heatmap activity" by entering "1"**
+>2. **In the dialog menu select the picture which you want to transform**
+>     > **Note**
+>     > For the best result the picture should be _51x7_ pixels  
+>3. **In the next dialog menu create or select an empty directory for the result of the program**
+>4. **In the opened console select the year you want to paint**
+>5. **Wait until the program will finish and close**
+>6. **In GitHub create a new repository**
+>7. **Push the repository on your PC with commits from the command line to the GitHub's repository using:**
+>```
+>git remote add origin https://github.com/[username]/[repositoryName]
+>```
+>```
+>git branch -M main
+>```
+>```
+>git push -u origin main
+>```
+>8. **Wait. GitHub will update your contribution heatmap soon**
+>   > **Warning**
+>   > The years you used to draw cannot be removed from the activity on GitHub
+
+<br>
+
+#### Fill you GitHub heatmap activity randomly:
+>
+>1. **In the menu select the "Fill you GitHub heatmap activity randomly" by entering "2"**
+>2. **In the dialog menu create or select an empty directory for the result of the program**
+>3. **In the opened console insert the beginning date of the period you want to fill**
+>     > **Note**
+>     > The date must be in YYYY-MM-DD format     
+>4. **Insert the ending date**
+>5. **Specify the minimal amount of commits**
+>6. **Specify the maximal amount of commits**
+>7. **Wait until the program will finish and close**
+>8. **In GitHub create a new repository**
+>9. **Push the repository on your PC with commits from the command line to the GitHub's repository using:**
+>```
+>git remote add origin https://github.com/[username]/[repositoryName]
+>```
+>```
+>git branch -M main
+>```
+>```
+>git push -u origin main
+>```
+>10. **Wait. GitHub will update your contribution heatmap soon**
+>   > **Warning**
+>   > The years you used to draw cannot be removed from the activity on GitHub
+
+___
 
 ### Selecting the picture
 
