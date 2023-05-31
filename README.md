@@ -1,17 +1,25 @@
 # Commit Draw
 
-**Allows you to convert your image to the activity on your GitHub heatmap**
+## Allows you to convert your image into the activity on your GitHub heatmap, as well as fill it randomly
+**`CommitDraw` is a tool to decorate your GitHub contribution heatmap
+based on the git's ability to accept commits _in the past_.**
 
-The image that was provided:\
+---
+## Modes of use:
+
+### Image convert
+**The image that was provided:**\
 ![example](https://github.com/Tankolom-X/CommitDraw/blob/main/media/example.png?raw=True "example") \
 From left to right: turtle, hedgehog, mushroom, smile, penguin
 
-The result:\
+**The result:**\
 ![result](https://github.com/Tankolom-X/CommitDraw/blob/main/media/result.png?raw=True "result")
 
+### Fill randomly
+**The result:**\
+![result](https://github.com/Tankolom-X/CommitDraw/blob/main/media/random_filling.png?raw=True "result")
 
-**`CommitDraw` is a tool to decorate your GitHub contribution heatmap
-based on the git's ability to accept commits _in the past_.**
+
 
 ---
 
