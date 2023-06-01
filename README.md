@@ -40,7 +40,7 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
       <thead>
          <th>
             <p align="center">
-               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/windows/CommitDraw.exe?raw=True" target="_blank">
+               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_windows.zip?raw=True" target="_blank">
                   <picture>
                      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/windows_white.png">
                      <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/windows.png">
@@ -51,7 +51,7 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
          </th>
          <th>
             <p align="center">
-               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/macos/CommitDraw?raw=True" target="_blank">
+               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_macos.zip?raw=True" target="_blank">
                   <picture>
                      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/apple_white.png">
                      <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/apple.png">
@@ -62,7 +62,7 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
          </th>
          <th>
             <p align="center">
-               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/linux/CommitDraw?raw=True" target="_blank">
+               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_linux.zip?raw=True" target="_blank">
                   <picture>
                      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/linux_white.png">
                      <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/linux.png">
@@ -74,13 +74,13 @@ It is highly recommended that you create a ***new GitHub repository*** when usin
       </thead>
       <tbody>
          <th>
-            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/windows/CommitDraw.exe?raw=True">Download</a>
+            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_windows.zip?raw=True">Download</a>
          </th>
          <th>
-            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/macos/CommitDraw?raw=True">Download</a>
+            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_macos.zip?raw=True">Download</a>
          </th>
          <th>
-            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/linux/CommitDraw?raw=True">Download</a>
+            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_linux.zip?raw=True">Download</a>
          </th>
       </tbody>
    </table>
