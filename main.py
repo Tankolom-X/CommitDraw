@@ -50,13 +50,18 @@ def image_conversion(image_path):
     global colors_amount, commits
 
     im = Image.open(image_path)
-    if im.size != SIZE:
-        im = im.resize(SIZE)
+    width, height = im.size
 
+    if height != 7:
+        new_height = 7
+        new_width = new_height * width / height
+        im = im.resize((int(new_width), new_height), Image.LANCZOS)
+
+    width, height = im.size
     im = im.convert('L')
     pixels = im.load()
-    for i in range(SIZE[0]):
-        for j in range(SIZE[1]):
+    for i in range(width):
+        for j in range(height):
             if pixels[i, j] == 255:
                 colors_amount = 5
                 break
@@ -73,9 +78,9 @@ def image_conversion(image_path):
     delta = 1 if colors_amount == 4 else 0
     max_color = len(result.getcolors()) - 1
     pixels = result.load()
-    for i in range(SIZE[0]):
+    for i in range(width):
         line = list()
-        for j in range(SIZE[1]):
+        for j in range(height):
             line.append(4 if pixels[i, j] == max_color else pixels[i, j] + delta)
         commits.append(line)
 
