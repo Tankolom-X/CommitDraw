@@ -1,0 +1,130 @@
+name: build
+
+on:
+  push:
+    branches: [ release ]
+
+jobs:
+  windows-build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: [ "3.11" ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        shell: pwsh
+        run: | 
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+
+      - name: Create an exe
+        shell: pwsh
+        run: pyinstaller -F main.py
+
+      - name: Zip the exe
+        shell: pwsh
+        run: |
+          7z a -tzip -r0 D:\a\CommitDraw\CommitDraw\build\CommitDraw_windows.zip D:\a\CommitDraw\CommitDraw\dist\main.exe
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'build'
+          path: '.\build\CommitDraw_windows.zip'
+          retention-days: 1
+
+
+  macos-build:
+    runs-on: macos-13
+    strategy:
+      matrix:
+        python-version: [ "3.11" ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+
+      - name: Create a binary
+        run: pyinstaller -F main.py
+
+      - name: Zip the binary
+        run: |
+          ls -l
+          7z a -tzip -r0 /Users/runner/work/CommitDraw/CommitDraw/build/CommitDraw_macos.zip /Users/runner/work/CommitDraw/CommitDraw/dist/main
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'build'
+          path: './build/CommitDraw_macos.zip'
+          retention-days: 1
+
+  linux-build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.11" ]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          pip install -r requirements.txt
+
+      - name: Create a binary
+        run: pyinstaller -F main.py
+
+      - name: Zip the binary
+        run: |
+          ls -l
+          7z a -tzip -r0 /home/runner/work/CommitDraw/CommitDraw/build/CommitDraw_linux.zip /home/runner/work/CommitDraw/CommitDraw/dist/main
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: 'build'
+          path: './build/CommitDraw_linux.zip'
+          retention-days: 1
+
+
+  Commit-changes:
+    needs: [windows-build, macos-build, linux-build]
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'build: updated binaries'
+          branch: release
+          file_pattern: build\CommitDraw_*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
