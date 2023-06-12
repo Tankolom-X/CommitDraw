@@ -85,7 +85,25 @@ def image_conversion(image_path):
         commits.append(line)
 
 
-def random_conversion(beginning, ending, minimal, maximal):
+def exclude_days():
+    if input('To exclude days of the week from your activity, insert "Y"\n(press enter to skip)\n') != 'Y':
+        return set()
+    else:
+        excluding_days = set([int(day) for day in input(
+            'Please, specify the days you don`t want to have any activity'
+            '\n(numbers of days of the week in a line separated by a space)\n'
+            '\n--To pass press enter--\n'
+            '\nSunday - 0'
+            '\nMonday - 1'
+            '\nTuesday - 2'
+            '\nWednesday - 3'
+            '\nThursday - 4'
+            '\nFriday - 5'
+            '\nSaturday - 6\n').split()])
+        return excluding_days
+
+
+def random_conversion(beginning, ending, minimal, maximal, excluding_days=None):
     empty_amount = (beginning.weekday() + 1) % 7
 
     line = list()
@@ -93,7 +111,7 @@ def random_conversion(beginning, ending, minimal, maximal):
         if len(line) == 7:
             commits.append(line)
             line = list()
-        if i in range(empty_amount):
+        if i in range(empty_amount) or ((i % 7) in excluding_days if excluding_days else False):
             line.append(0)
         else:
             line.append(randint(minimal, maximal))
@@ -104,10 +122,12 @@ def random_conversion(beginning, ending, minimal, maximal):
 
 
 def ask_git_configs():
-    author = input('Specify the commits author (skip to set by default): ')
-    e_mail = input('Specify email (skip to set by default): ')
-
-    return {'author': author, 'e_mail': e_mail}
+    if input('To specify commits configs(author, email), insert "Y"\n(press enter to skip)\n') != 'Y':
+        return {'author': None, 'e_mail': None}
+    else:
+        author = input('Specify the commits author (press enter to set by default): ')
+        e_mail = input('Specify email (press enter to set by default): ')
+        return {'author': author, 'e_mail': e_mail}
 
 
 def set_git_config(configs):
@@ -117,7 +137,7 @@ def set_git_config(configs):
         os.system(f'git config --local user.email {configs["e_mail"]}')
 
 
-def prepare_to_commits(directory_path, configs):
+def prepare_to_commits(directory_path, configs=None):
     os.chdir(directory_path)
     if os.path.isfile('commits_file.txt'):
         os.remove('commits_file.txt')
@@ -157,7 +177,6 @@ def menu():
 
 
 def main():
-
     index = menu()
 
     if index == 1:
@@ -171,6 +190,8 @@ def main():
         directory = modal_directory_select()
         beginning = date_select()
         ending = date_select(beginning=False)
+        print()
+        excluding_days = exclude_days()
         minimal = int(input('Specify the minimal amount of commits \n'))
         maximal = int(input('Specify the maximal amount of commits \n'))
 
@@ -178,10 +199,10 @@ def main():
             print('Dates are the same')
             exit()
 
-        random_conversion(beginning, ending, minimal, maximal)
+        random_conversion(beginning, ending, minimal, maximal, excluding_days=excluding_days)
 
     configs = ask_git_configs()
-    prepare_to_commits(directory, configs)
+    prepare_to_commits(directory, configs=configs)
     make_commits(beginning)
 
 
