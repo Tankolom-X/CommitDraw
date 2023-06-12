@@ -103,13 +103,29 @@ def random_conversion(beginning, ending, minimal, maximal):
         commits.append(line)
 
 
-def prepare_to_commits(directory_path):
+def ask_git_configs():
+    author = input('Specify the commits author (skip to set by default): ')
+    e_mail = input('Specify email (skip to set by default): ')
+
+    return {'author': author, 'e_mail': e_mail}
+
+
+def set_git_config(configs):
+    if configs['author']:
+        os.system(f'git config --local user.name "{configs["author"]}"')
+    if configs['e_mail']:
+        os.system(f'git config --local user.email {configs["e_mail"]}')
+
+
+def prepare_to_commits(directory_path, configs):
     os.chdir(directory_path)
     if os.path.isfile('commits_file.txt'):
         os.remove('commits_file.txt')
     if os.path.isdir('.git'):
         rmtree('.git')
     os.system('git init')
+    if configs:
+        set_git_config(configs)
 
 
 def make_commits(beginning):
@@ -141,6 +157,7 @@ def menu():
 
 
 def main():
+
     index = menu()
 
     if index == 1:
@@ -163,7 +180,8 @@ def main():
 
         random_conversion(beginning, ending, minimal, maximal)
 
-    prepare_to_commits(directory)
+    configs = ask_git_configs()
+    prepare_to_commits(directory, configs)
     make_commits(beginning)
 
 
