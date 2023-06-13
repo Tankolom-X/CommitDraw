@@ -145,21 +145,27 @@ def description_of_settings():
 
 
 def settings_of_random():
-    description_of_settings()
-    line = input('Please insert the settings: ')
-    commands = line.split()
-    random_array = list()
-    for command in commands:
-        if command.isnumeric():
-            random_array.append(int(command))
-        if '-' in command:
-            start, end = command.split('-')
-            random_array += range(int(start), int(end) + 1)
-        if '*' in command:
-            number, frequency = command.split('*')
-            for i in range(int(frequency)):
-                random_array.append(int(number))
-    return random_array
+    if input('To specify the random filling, insert "Y"\n(press enter to skip)\n') != 'Y':
+        minimal = int(input('Specify the minimal amount of commits \n'))
+        maximal = int(input('Specify the maximal amount of commits \n'))
+        random_array = list(range(minimal, maximal + 1))
+        return random_array
+    else:
+        description_of_settings()
+        line = input('Please insert the settings: ')
+        commands = line.split()
+        random_array = list()
+        for command in commands:
+            if command.isnumeric():
+                random_array.append(int(command))
+            if '-' in command:
+                start, end = command.split('-')
+                random_array += range(int(start), int(end) + 1)
+            if '*' in command:
+                number, frequency = command.split('*')
+                for i in range(int(frequency)):
+                    random_array.append(int(number))
+        return random_array
 
 
 def random_conversion(beginning, ending, random_array, excluding_days=None):
@@ -255,14 +261,12 @@ def main():
 
         print()
         excluding_days = exclude_days()
-        if input('To specify the random filling, insert "Y"\n(press enter to skip)\n') != 'Y':
-            minimal = int(input('Specify the minimal amount of commits \n'))
-            maximal = int(input('Specify the maximal amount of commits \n'))
-            random_array = list(range(minimal, maximal + 1))
-        else:
-            random_array = settings_of_random()
+        print()
+        random_array = settings_of_random()
         random_conversion(beginning, ending, random_array, excluding_days=excluding_days)
+
     configs = ask_git_configs()
+    print()
     prepare_to_commits(directory, configs=configs)
     make_commits(beginning)
 
