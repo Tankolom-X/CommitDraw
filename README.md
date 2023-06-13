@@ -40,8 +40,8 @@ from the date you have chosen.
 
 ### Fill randomly
 `CommitDraw` makes commits for the period you selected,
-in amount of randomly selected value from the generated array (you can [**specify it yourself**](###Settings of the filling), or
-only specify the minimum and maximum values).It can also [**exclude days of the week**](###Exclude days of the week) that you have chosen
+in amount of randomly selected value from the generated array (you can [**specify it yourself**](https://github.com/Tankolom-X/CommitDraw#settings-of-the-filling), or
+only specify the minimum and maximum values).It can also [**exclude days of the week**](https://github.com/Tankolom-X/CommitDraw#exclude-days-of-the-week) that you have chosen
 
 ---
 
@@ -125,8 +125,8 @@ only specify the minimum and maximum values).It can also [**exclude days of the 
    > The date must be in **YYYY-MM-DD format**
 3. **Follow the prompts** 
    > :bulb:
-   > Learn more about [*customizing random filling*](##Сustomizing the random filling)\
-   > Learn more about [*selecting an image for the image conversion*](##Selecting the picture)
+   > Learn more about [*customizing random filling*](https://github.com/Tankolom-X/CommitDraw#customizing-the-random-filling)\
+   > Learn more about [*selecting an image for the image conversion*](https://github.com/Tankolom-X/CommitDraw#selecting-the-picture)
 4. **Wait until the program will finish and close**
 5. **In GitHub create a new repository**
 6. **Push the repository on your PC with commits from the command line to the GitHub's repository using:**
