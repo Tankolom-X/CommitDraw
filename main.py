@@ -1,6 +1,7 @@
 from PIL import Image
 import datetime as dt
 import os
+from math import ceil
 from git import rmtree
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, askdirectory
@@ -8,6 +9,7 @@ from random import choice
 
 SIZE = (51, 7)
 colors_amount = 4
+activity_colors = ((255, 255, 255), (155, 233, 168), (64, 196, 99), (48, 161, 78), (33, 110, 57))
 commits = list()
 
 
@@ -20,7 +22,14 @@ def modal_image_select():
     root.destroy()
     if not path_to_image:
         exit()
-    return path_to_image
+    try:
+        Image.open(path_to_image)
+    except:
+        print('!!! Cannot convert this type of files to the activity !!!')
+        print()
+        return modal_image_select()
+    else:
+        return path_to_image
 
 
 def modal_directory_select():
@@ -37,14 +46,27 @@ def modal_directory_select():
 
 def date_select(beginning=True):
     if beginning:
-        message = 'Please specify the beginning date in YYYY-MM-DD format \n'
-        year, month, day = input(message).split('-')
-        date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+        try:
+            message = 'Please specify the beginning date in YYYY-MM-DD format \n'
+            year, month, day = input(message).split('-')
+            date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+        except:
+            print('!!! Invalid date !!!')
+            print()
+            return date_select(beginning=True)
+        else:
+            return date
     else:
-        message = 'Please specify the ending date in YYYY-MM-DD format \n'
-        year, month, day = input(message).split('-')
-        date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
-    return date
+        try:
+            message = 'Please specify the ending date in YYYY-MM-DD format \n'
+            year, month, day = input(message).split('-')
+            date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+        except:
+            print('!!! Invalid date !!!')
+            print()
+            return date_select(beginning=False)
+        else:
+            return date
 
 
 def image_conversion(image_path):
@@ -115,9 +137,15 @@ def exclude_days():
     if input('To exclude days of the week from your activity, insert "Y"\n(press enter to skip)\n') != 'Y':
         return set()
     else:
-        description_of_exclude_days()
-        excluding_days = set([int(day) for day in input('Exclude days: ').split()])
-        return excluding_days
+        try:
+            description_of_exclude_days()
+            excluding_days = set([int(day) for day in input('Exclude days: ').split()])
+        except:
+            print('!!! Input is incorrect !!!')
+            print()
+            return exclude_days()
+        else:
+            return excluding_days
 
 
 def description_of_settings():
@@ -144,28 +172,44 @@ def description_of_settings():
     print()
 
 
-def settings_of_random():
+def set_the_settings_of_random():
     if input('To specify the random filling, insert "Y"\n(press enter to skip)\n') != 'Y':
-        minimal = int(input('Specify the minimal amount of commits \n'))
-        maximal = int(input('Specify the maximal amount of commits \n'))
-        random_array = list(range(minimal, maximal + 1))
-        return random_array
+        try:
+            minimal = int(input('Specify the minimal amount of commits \n'))
+            maximal = int(input('Specify the maximal amount of commits \n'))
+            random_array = list(range(minimal, maximal + 1))
+        except:
+            print('!!! The settings are incorrect !!!')
+            print()
+            return set_the_settings_of_random()
+        else:
+            return random_array
     else:
-        description_of_settings()
-        line = input('Please insert the settings: ')
-        commands = line.split()
-        random_array = list()
-        for command in commands:
-            if command.isnumeric():
-                random_array.append(int(command))
-            if '-' in command:
-                start, end = command.split('-')
-                random_array += range(int(start), int(end) + 1)
-            if '*' in command:
-                number, frequency = command.split('*')
-                for i in range(int(frequency)):
-                    random_array.append(int(number))
-        return random_array
+        try:
+            description_of_settings()
+            line = input('Please insert the settings: ')
+            commands = line.split()
+            random_array = list()
+            for command in commands:
+                if command.isnumeric():
+                    random_array.append(int(command))
+                if '-' in command:
+                    start, end = command.split('-')
+                    random_array += range(int(start), int(end) + 1)
+                if '*' in command:
+                    number, frequency = command.split('*')
+                    for i in range(int(frequency)):
+                        random_array.append(int(number))
+                else:
+                    print('!!! The settings are incorrect !!!')
+                    print()
+                    return set_the_settings_of_random()
+        except:
+            print('!!! The settings are incorrect !!!')
+            print()
+            return set_the_settings_of_random()
+        else:
+            return random_array
 
 
 def random_conversion(beginning, ending, random_array, excluding_days=None):
@@ -204,13 +248,14 @@ def set_git_config(configs):
 
 def prepare_to_commits(directory_path, configs=None):
     os.chdir(directory_path)
-    if os.path.isfile('commits_file.txt'):
-        os.remove('commits_file.txt')
+    if os.path.isfile('commits_image.png'):
+        os.remove('commits_image.png')
     if os.path.isdir('.git'):
         rmtree('.git')
     os.system('git init')
     if configs:
         set_git_config(configs)
+    result_image_setup()
 
 
 def make_commits(beginning):
@@ -218,14 +263,43 @@ def make_commits(beginning):
     for week in range(len(commits)):
         for day in range((beginning.weekday() + 1) % 7 if week == 0 else 0, len(commits[0])):
             for commit in range(commits[week][day]):
-                f = open('commits_file.txt', 'a')
-                f.write('0')
-                f.close()
-                os.system('git add commits_file.txt')
-                command = f'git commit -m \"{commit_date.date()} {commit + 1}\" --no-edit --date=\"{commit_date}\"'
+                image = Image.open('commits_image.png')
+                pixels = image.load()
+                pixels[week, day] = activity_colors[get_activity_color(commits[week][day])]
+                image.save('commits_image.png')
+                os.system('git add commits_image.png')
+                command = f'git commit -m \"{commit_date.date()} {commit + 1}\" --no-edit --date=\"{commit_date}\" --allow-empty'
                 os.system(command)
             commit_date += dt.timedelta(days=1)
     print('Commits were generated. You can push them to your empty GitHub repository')
+
+
+def calculate_ratio():
+    amounts = list()
+    for week in commits:
+        for day in week:
+            amounts.append(day)
+    return max(amounts) / 4.5
+
+
+def get_activity_color(days_commits):
+    ratio = calculate_ratio()
+    if not ratio:
+        return 0
+    current_level = ceil(days_commits / ratio)
+    if round(ratio * 4.5) == 2:
+        return 4
+    if current_level >= 4:
+        return 4
+    if not current_level and days_commits > 0:
+        return 1
+    return current_level
+
+
+def result_image_setup():
+    length = len(commits)
+    commits_image = Image.new("RGB", (length, 7), activity_colors[0])
+    commits_image.save('commits_image.png')
 
 
 def menu():
@@ -256,13 +330,17 @@ def main():
         beginning = date_select()
         ending = date_select(beginning=False)
         if beginning == ending:
-            print('Dates are the same')
+            print('!!! Dates are the same !!!')
+            exit()
+        if ending < beginning:
+            print('        !!! Dates are incorrect !!!')
+            print('!!! The end date is before the start date !!!')
             exit()
 
         print()
         excluding_days = exclude_days()
         print()
-        random_array = settings_of_random()
+        random_array = set_the_settings_of_random()
         random_conversion(beginning, ending, random_array, excluding_days=excluding_days)
 
     configs = ask_git_configs()
