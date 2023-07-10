@@ -1,6 +1,7 @@
 from PIL import Image
 import datetime as dt
 import os
+from math import ceil
 from git import rmtree
 import tkinter as tk
 from tkinter.filedialog import askopenfilename, askdirectory
@@ -8,6 +9,7 @@ from random import choice
 
 SIZE = (51, 7)
 colors_amount = 4
+activity_colors = ((255, 255, 255), (155, 233, 168), (64, 196, 99), (48, 161, 78), (33, 110, 57))
 commits = list()
 
 
@@ -204,8 +206,8 @@ def set_git_config(configs):
 
 def prepare_to_commits(directory_path, configs=None):
     os.chdir(directory_path)
-    if os.path.isfile('commits_file.txt'):
-        os.remove('commits_file.txt')
+    if os.path.isfile('commits_image.png'):
+        os.remove('commits_image.png')
     if os.path.isdir('.git'):
         rmtree('.git')
     os.system('git init')
@@ -218,14 +220,43 @@ def make_commits(beginning):
     for week in range(len(commits)):
         for day in range((beginning.weekday() + 1) % 7 if week == 0 else 0, len(commits[0])):
             for commit in range(commits[week][day]):
-                f = open('commits_file.txt', 'a')
-                f.write('0')
-                f.close()
-                os.system('git add commits_file.txt')
-                command = f'git commit -m \"{commit_date.date()} {commit + 1}\" --no-edit --date=\"{commit_date}\"'
+                image = Image.open('commits_image.png')
+                pixels = image.load()
+                pixels[week, day] = activity_colors[get_activity_color(commits[week][day])]
+                image.save('commits_image.png')
+                os.system('git add commits_image.png')
+                command = f'git commit -m \"{commit_date.date()} {commit + 1}\" --no-edit --date=\"{commit_date}\" --allow-empty'
                 os.system(command)
             commit_date += dt.timedelta(days=1)
     print('Commits were generated. You can push them to your empty GitHub repository')
+
+
+def calculate_ratio():
+    amounts = list()
+    for week in commits:
+        for day in week:
+            amounts.append(day)
+    return max(amounts) / 4.5
+
+
+def get_activity_color(days_commits):
+    ratio = calculate_ratio()
+    if not ratio:
+        return 0
+    current_level = ceil(days_commits / ratio)
+    if round(ratio * 4.5) == 2:
+        return 4
+    if current_level >= 4:
+        return 4
+    if not current_level and days_commits > 0:
+        return 1
+    return current_level
+
+
+def result_image_setup():
+    length = len(commits)
+    commits_image = Image.new("RGB", (length, 7), activity_colors[0])
+    commits_image.save('commits_image.png')
 
 
 def menu():
@@ -268,6 +299,7 @@ def main():
     configs = ask_git_configs()
     print()
     prepare_to_commits(directory, configs=configs)
+    result_image_setup()
     make_commits(beginning)
 
 
