@@ -22,7 +22,14 @@ def modal_image_select():
     root.destroy()
     if not path_to_image:
         exit()
-    return path_to_image
+    try:
+        Image.open(path_to_image)
+    except:
+        print('!!! Cannot convert this type of files to the activity !!!')
+        print()
+        return modal_image_select()
+    else:
+        return path_to_image
 
 
 def modal_directory_select():
@@ -39,14 +46,27 @@ def modal_directory_select():
 
 def date_select(beginning=True):
     if beginning:
-        message = 'Please specify the beginning date in YYYY-MM-DD format \n'
-        year, month, day = input(message).split('-')
-        date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+        try:
+            message = 'Please specify the beginning date in YYYY-MM-DD format \n'
+            year, month, day = input(message).split('-')
+            date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+        except:
+            print('!!! Invalid date !!!')
+            print()
+            return date_select(beginning=True)
+        else:
+            return date
     else:
-        message = 'Please specify the ending date in YYYY-MM-DD format \n'
-        year, month, day = input(message).split('-')
-        date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
-    return date
+        try:
+            message = 'Please specify the ending date in YYYY-MM-DD format \n'
+            year, month, day = input(message).split('-')
+            date = dt.datetime(day=int(day), month=int(month), year=int(year), hour=12)
+        except:
+            print('!!! Invalid date !!!')
+            print()
+            return date_select(beginning=False)
+        else:
+            return date
 
 
 def image_conversion(image_path):
@@ -117,9 +137,15 @@ def exclude_days():
     if input('To exclude days of the week from your activity, insert "Y"\n(press enter to skip)\n') != 'Y':
         return set()
     else:
-        description_of_exclude_days()
-        excluding_days = set([int(day) for day in input('Exclude days: ').split()])
-        return excluding_days
+        try:
+            description_of_exclude_days()
+            excluding_days = set([int(day) for day in input('Exclude days: ').split()])
+        except:
+            print('!!! Input is incorrect !!!')
+            print()
+            return exclude_days()
+        else:
+            return excluding_days
 
 
 def description_of_settings():
@@ -146,28 +172,44 @@ def description_of_settings():
     print()
 
 
-def settings_of_random():
+def set_the_settings_of_random():
     if input('To specify the random filling, insert "Y"\n(press enter to skip)\n') != 'Y':
-        minimal = int(input('Specify the minimal amount of commits \n'))
-        maximal = int(input('Specify the maximal amount of commits \n'))
-        random_array = list(range(minimal, maximal + 1))
-        return random_array
+        try:
+            minimal = int(input('Specify the minimal amount of commits \n'))
+            maximal = int(input('Specify the maximal amount of commits \n'))
+            random_array = list(range(minimal, maximal + 1))
+        except:
+            print('!!! The settings are incorrect !!!')
+            print()
+            return set_the_settings_of_random()
+        else:
+            return random_array
     else:
-        description_of_settings()
-        line = input('Please insert the settings: ')
-        commands = line.split()
-        random_array = list()
-        for command in commands:
-            if command.isnumeric():
-                random_array.append(int(command))
-            if '-' in command:
-                start, end = command.split('-')
-                random_array += range(int(start), int(end) + 1)
-            if '*' in command:
-                number, frequency = command.split('*')
-                for i in range(int(frequency)):
-                    random_array.append(int(number))
-        return random_array
+        try:
+            description_of_settings()
+            line = input('Please insert the settings: ')
+            commands = line.split()
+            random_array = list()
+            for command in commands:
+                if command.isnumeric():
+                    random_array.append(int(command))
+                if '-' in command:
+                    start, end = command.split('-')
+                    random_array += range(int(start), int(end) + 1)
+                if '*' in command:
+                    number, frequency = command.split('*')
+                    for i in range(int(frequency)):
+                        random_array.append(int(number))
+                else:
+                    print('!!! The settings are incorrect !!!')
+                    print()
+                    return set_the_settings_of_random()
+        except:
+            print('!!! The settings are incorrect !!!')
+            print()
+            return set_the_settings_of_random()
+        else:
+            return random_array
 
 
 def random_conversion(beginning, ending, random_array, excluding_days=None):
@@ -213,6 +255,7 @@ def prepare_to_commits(directory_path, configs=None):
     os.system('git init')
     if configs:
         set_git_config(configs)
+    result_image_setup()
 
 
 def make_commits(beginning):
@@ -287,19 +330,22 @@ def main():
         beginning = date_select()
         ending = date_select(beginning=False)
         if beginning == ending:
-            print('Dates are the same')
+            print('!!! Dates are the same !!!')
+            exit()
+        if ending < beginning:
+            print('        !!! Dates are incorrect !!!')
+            print('!!! The end date is before the start date !!!')
             exit()
 
         print()
         excluding_days = exclude_days()
         print()
-        random_array = settings_of_random()
+        random_array = set_the_settings_of_random()
         random_conversion(beginning, ending, random_array, excluding_days=excluding_days)
 
     configs = ask_git_configs()
     print()
     prepare_to_commits(directory, configs=configs)
-    result_image_setup()
     make_commits(beginning)
 
 
