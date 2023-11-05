@@ -12,16 +12,16 @@ based on the git's ability to accept commits _in the past_.**
 ### Image convert
 
 **The image that was provided:**\
-![example](https://github.com/Tankolom-X/CommitDraw/blob/main/media/example.png?raw=True "example") \
+![example](https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/example.png?raw=True "example") \
 From left to right: turtle, hedgehog, mushroom, smile, penguin
 
 **The result:**\
-![result](https://github.com/Tankolom-X/CommitDraw/blob/main/media/result.png?raw=True "result")
+![result](https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/result.png?raw=True "result")
 
 ### Fill randomly
 
 **The result:**\
-![result](https://github.com/Tankolom-X/CommitDraw/blob/main/media/random_filling.png?raw=True "result")\
+![result](https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/random_filling.png?raw=True "result")\
 On the left side of the image settings of random filling are not specified, on the right are specified
 
 
@@ -58,7 +58,7 @@ week**](https://github.com/Tankolom-X/CommitDraw#exclude-days-of-the-week) that 
 
 
 **Generated image in the selected folder on your PC:**\
-![generated image](https://github.com/Tankolom-X/CommitDraw/blob/main/media/generated_image.png?raw=True "generated image on the PC")
+![generated image](https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/generated_image.png?raw=True "generated image on the PC")
 
 ---
 
@@ -69,33 +69,33 @@ week**](https://github.com/Tankolom-X/CommitDraw#exclude-days-of-the-week) that 
       <thead>
          <th>
             <p align="center">
-               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_windows.zip?raw=True" target="_blank">
+               <a href="https://github.com/Tankolom-X/CommitDraw/blob/1.x/build/CommitDraw_windows.zip?raw=True" target="_blank">
                   <picture>
-                     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/windows_white.png">
-                     <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/windows.png">
-                     <img alt="windows" src="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/windows.png">
+                     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/windows_white.png">
+                     <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/windows.png">
+                     <img alt="windows" src="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/windows.png">
                   </picture>
                </a>
             </p>
          </th>
          <th>
             <p align="center">
-               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_macos.zip?raw=True" target="_blank">
+               <a href="https://github.com/Tankolom-X/CommitDraw/blob/1.x/build/CommitDraw_macos.zip?raw=True" target="_blank">
                   <picture>
-                     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/apple_white.png">
-                     <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/apple.png">
-                     <img alt="apple" src="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/apple.png">
+                     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/apple_white.png">
+                     <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/apple.png">
+                     <img alt="apple" src="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/apple.png">
                   </picture>
                </a>
             </p>
          </th>
          <th>
             <p align="center">
-               <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_linux.zip?raw=True" target="_blank">
+               <a href="https://github.com/Tankolom-X/CommitDraw/blob/1.x/build/CommitDraw_linux.zip?raw=True" target="_blank">
                   <picture>
-                     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/linux_white.png">
-                     <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/linux.png">
-                     <img alt="linux" src="https://github.com/Tankolom-X/CommitDraw/blob/main/media/os_icons/linux.png">
+                     <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/linux_white.png">
+                     <source media="(prefers-color-scheme: light)" srcset="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/linux.png">
+                     <img alt="linux" src="https://github.com/Tankolom-X/CommitDraw/blob/1.x/media/os_icons/linux.png">
                   </picture>
                </a>
             </p>
@@ -103,13 +103,13 @@ week**](https://github.com/Tankolom-X/CommitDraw#exclude-days-of-the-week) that 
       </thead>
       <tbody>
          <th>
-            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_windows.zip?raw=True">Download</a>
+            <a href="https://github.com/Tankolom-X/CommitDraw/blob/1.x/build/CommitDraw_windows.zip?raw=True">Download</a>
          </th>
          <th>
-            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_macos.zip?raw=True">Download</a>
+            <a href="https://github.com/Tankolom-X/CommitDraw/blob/1.x/build/CommitDraw_macos.zip?raw=True">Download</a>
          </th>
          <th>
-            <a href="https://github.com/Tankolom-X/CommitDraw/blob/main/build/CommitDraw_linux.zip?raw=True">Download</a>
+            <a href="https://github.com/Tankolom-X/CommitDraw/blob/1.x/build/CommitDraw_linux.zip?raw=True">Download</a>
          </th>
       </tbody>
    </table>
@@ -172,7 +172,7 @@ Your picture should be **7 pixels in height**. Otherwise, the result may be blur
 White color means no activity(Empty cell on your GitHub heatmap).\
 The darker the color of your image the darker the color of the cell on your GitHub heatmap.
 
-Examples you can find here: https://github.com/Tankolom-X/CommitDraw/tree/main/samples
+Examples you can find here: https://github.com/Tankolom-X/CommitDraw/tree/1.x/samples
 
 ---
 
