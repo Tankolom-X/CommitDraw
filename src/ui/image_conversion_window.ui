@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>927</width>
+    <height>587</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>927</width>
+    <height>587</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>927</width>
+    <height>587</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Convert an image</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background: rgb(23, 27, 33)</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="previous_settings_btn">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>10</y>
+      <width>261</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(158, 220, 192);
+font: 14pt &quot;Terminal&quot;;
+background-color: rgb(32, 37, 44);
+</string>
+    </property>
+    <property name="text">
+     <string>Set the previous settings</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>901</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="lineWidth">
+     <number>2</number>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="image_label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>90</y>
+      <width>459</width>
+      <height>63</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(32, 42, 44);
+color: rgb(0, 109, 50);
+font: 20pt &quot;Terminal&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Click to select the image</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QCalendarWidget" name="calendarWidget">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>90</y>
+      <width>341</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(63, 67, 73);
+alternate-background-color: rgb(52, 57, 64);
+selection-background-color: rgb(47, 62, 59);
+selection-color: rgb(57, 211, 83);
+</string>
+    </property>
+    <property name="locale">
+     <locale language="English" country="UnitedStates"/>
+    </property>
+    <property name="minimumDate">
+     <date>
+      <year>2005</year>
+      <month>4</month>
+      <day>7</day>
+     </date>
+    </property>
+    <property name="firstDayOfWeek">
+     <enum>Qt::Sunday</enum>
+    </property>
+    <property name="gridVisible">
+     <bool>false</bool>
+    </property>
+    <property name="selectionMode">
+     <enum>QCalendarWidget::SingleSelection</enum>
+    </property>
+    <property name="horizontalHeaderFormat">
+     <enum>QCalendarWidget::ShortDayNames</enum>
+    </property>
+    <property name="verticalHeaderFormat">
+     <enum>QCalendarWidget::ISOWeekNumbers</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="date_label">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>60</y>
+      <width>341</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(57, 211, 83);
+font: 13pt &quot;Terminal&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>The beginning date:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="author_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>410</y>
+      <width>331</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(43, 47, 53);
+color: rgb(38, 166, 65);
+font: 20pt &quot;Terminal&quot;;
+border: 1px solid  rgb(158, 220, 192);
+border-radius: 5px;
+padding:5px;
+</string>
+    </property>
+    <property name="inputMask">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="frame">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>Left it blank to set by default</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="text_author_label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>380</y>
+      <width>331</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(57, 211, 83);
+font: 13pt &quot;Terminal&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Commits author:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="text_email_label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>470</y>
+      <width>331</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(57, 211, 83);
+font: 13pt &quot;Terminal&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Email:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="email_lineEdit">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>500</y>
+      <width>331</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(43, 47, 53);
+color: rgb(38, 166, 65);
+font: 20pt &quot;Terminal&quot;;
+border: 1px solid  rgb(158, 220, 192);
+border-radius: 5px;
+padding:5px;
+</string>
+    </property>
+    <property name="inputMask">
+     <string/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="frame">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>Left it blank to set by default</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_btn">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>420</y>
+      <width>341</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(87, 241, 123);
+font: 14pt &quot;Terminal&quot;;
+background-color: rgb(32, 47, 44);
+border: 2px solid;
+border-color: rgb(57, 211, 83), rgb(57, 211, 83),  rgb(14, 68, 41),  rgb(14, 68, 41);
+border-radius: 25px;
+</string>
+    </property>
+    <property name="text">
+     <string>Start converting the image</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="directory_label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>320</y>
+      <width>461</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(32, 42, 44);
+color: rgb(0, 109, 50);
+font: 20pt &quot;Terminal&quot;;
+border: 1px solid  rgb(158, 220, 192);
+border-radius: 5px;
+padding:5px;</string>
+    </property>
+    <property name="text">
+     <string>Click to select the directory</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="text_directory_label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>290</y>
+      <width>331</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(57, 211, 83);
+font: 13pt &quot;Terminal&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Dirctory:   </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="text_image_label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>60</y>
+      <width>331</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(57, 211, 83);
+font: 13pt &quot;Terminal&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Image:   </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="text_result_label_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>160</y>
+      <width>331</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Terminal</family>
+      <pointsize>13</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+      <underline>false</underline>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(57, 211, 83);
+font: 13pt &quot;Terminal&quot;;
+</string>
+    </property>
+    <property name="text">
+     <string>Intended result:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="image_result_label">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>190</y>
+      <width>459</width>
+      <height>63</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Terminal</family>
+      <pointsize>14</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(32, 42, 44);
+color: rgb(0, 109, 50);
+font: 14pt &quot;Terminal&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Will be shown after selecting the image and the date</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>line</zorder>
+   <zorder>previous_settings_btn</zorder>
+   <zorder>image_label</zorder>
+   <zorder>calendarWidget</zorder>
+   <zorder>date_label</zorder>
+   <zorder>author_lineEdit</zorder>
+   <zorder>text_author_label</zorder>
+   <zorder>text_email_label</zorder>
+   <zorder>email_lineEdit</zorder>
+   <zorder>start_btn</zorder>
+   <zorder>directory_label</zorder>
+   <zorder>text_directory_label</zorder>
+   <zorder>text_image_label</zorder>
+   <zorder>text_result_label_2</zorder>
+   <zorder>image_result_label</zorder>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
