@@ -32,7 +32,7 @@ class ImageConverter:
 
         result = im.quantize(self.colors_amount)
         if len(result.getcolors()) == 1 and self.colors_amount == 5:
-            return 'White image'
+            return False
 
         delta = 1 if self.colors_amount == 4 else 0
         max_color = len(result.getcolors()) - 1
@@ -42,21 +42,31 @@ class ImageConverter:
             for j in range(height):
                 line.append(4 if pixels[i, j] == max_color else pixels[i, j] + delta)
             self.commits.append(line)
+        return True
 
     def make_a_result_image(self, beginning, image_path):
-
         commit_date = beginning
-        if self.image_conversion_to_commits(image_path) == 'White image':
-            return 'White image'
-        length = len(self.commits)
-        image = Image.new("RGB", (length, 7), self.activity_colors[0])
+
+        if not self.image_conversion_to_commits(image_path):
+            return False
+
+        self.image_setup()
+        image = Image.open('../../samples/result.png')
+
         for week in range(len(self.commits)):
             for day in range((beginning.weekday() + 1) % 7 if week == 0 else 0, len(self.commits[0])):
                 for commit in range(self.commits[week][day]):
-                    pixels = image.load()
-                    pixels[week, day] = self.activity_colors[self.get_activity_color(self.commits[week][day])]
+                    image = self.paint_pixel(image, week, day)
                 commit_date += dt.timedelta(days=1)
-        return image
+        self.save_result_image(image)
+
+        return True
+
+    def image_setup(self):
+        length = len(self.commits)
+        image = Image.new("RGB", (length, 7), self.activity_colors[0])
+        self.save_result_image(image)
+
 
     def calculate_ratio(self):
         amounts = list()
@@ -69,6 +79,7 @@ class ImageConverter:
         ratio = self.calculate_ratio()
         if not ratio:
             return 0
+
         current_level = ceil(days_commits / ratio)
         if round(ratio * 4.5) == 2:
             return 4
@@ -79,6 +90,12 @@ class ImageConverter:
         return current_level
 
     def save_result_image(self, image):
-        path = f'../../samples/result.png'
+        path = '../../samples/result.png'
         image.save(path)
         return path
+
+    def paint_pixel(self, image, week, day):
+        new_image = image
+        pixels = image.load()
+        pixels[week, day] = self.activity_colors[self.get_activity_color(self.commits[week][day])]
+        return new_image
