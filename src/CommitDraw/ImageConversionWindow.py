@@ -32,18 +32,6 @@ class ImageConversionWindow(QMainWindow):
         self.date = None
         self.image_path = None
 
-    def image_select(self, event):
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
-        dialog.setNameFilter("Images (*.png *.jpg *jpeg)")
-        dialog.setViewMode(QFileDialog.ViewMode.List)
-        if dialog.exec():
-            image_path = dialog.selectedFiles()[0]
-            if image_path:
-                self.set_image(image_path, 'image_label')
-                self.image_path = image_path
-                if self.make_image_result() == 'White image':
-                    self.error_white_image()
 
     def set_image(self, filename, label_name):
         pixmap = QPixmap(filename).scaled(459, 63)
@@ -57,6 +45,27 @@ class ImageConversionWindow(QMainWindow):
         error.setIcon(QMessageBox.Warning)
         error.exec_()
 
+    def make_image_result(self):
+        if self.image_path and self.date:
+            image_converter = ImageConverter()
+            result = image_converter.make_a_result_image(self.date, self.image_path)
+            if not result:
+                return 'White image'
+            self.set_image('../../samples/result.png', 'image_result_label')
+
+    def image_select(self, event):
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.FileMode.ExistingFiles)
+        dialog.setNameFilter("Images (*.png *.jpg *jpeg)")
+        dialog.setViewMode(QFileDialog.ViewMode.List)
+        if dialog.exec():
+            image_path = dialog.selectedFiles()[0]
+            if image_path:
+                self.set_image(image_path, 'image_label')
+                self.image_path = image_path
+                if self.make_image_result() == 'White image':
+                    self.error_white_image()
+
     def date_select(self):
         selected_date = self.calendarWidget.selectedDate().toString('dd-MM-yyyy').split('-')
         date = dt.datetime(year=int(selected_date[2]), month=int(selected_date[1]), day=int(selected_date[0]), hour=12)
@@ -65,11 +74,3 @@ class ImageConversionWindow(QMainWindow):
         if self.make_image_result() == 'White image':
             self.error_white_image()
 
-    def make_image_result(self):
-        if self.image_path and self.date:
-            image_converter = ImageConverter()
-            image = image_converter.make_a_result_image(self.date, self.image_path)
-            if image == 'White image':
-                return 'White image'
-            result_image_path = image_converter.save_result_image(image)
-            self.set_image(result_image_path, 'image_result_label')
