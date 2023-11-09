@@ -67,7 +67,6 @@ class ImageConverter:
         image = Image.new("RGB", (length, 7), self.activity_colors[0])
         self.save_result_image(image)
 
-
     def calculate_ratio(self):
         amounts = list()
         for week in self.commits:
@@ -99,3 +98,6 @@ class ImageConverter:
         pixels = image.load()
         pixels[week, day] = self.activity_colors[self.get_activity_color(self.commits[week][day])]
         return new_image
+
+    def set_commits(self, commits):
+        self.commits = commits
