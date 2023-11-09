@@ -101,3 +101,6 @@ class ImageConverter:
 
     def set_commits(self, commits):
         self.commits = commits
+
+    def get_commits(self):
+        return self.commits
