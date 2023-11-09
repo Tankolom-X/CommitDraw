@@ -62,10 +62,11 @@ class ImageConverter:
 
         return True
 
-    def image_setup(self):
+    def image_setup(self, path='../../samples'):
+        directory_path = path
         length = len(self.commits)
         image = Image.new("RGB", (length, 7), self.activity_colors[0])
-        self.save_result_image(image)
+        self.save_result_image(image, directory_path)
 
     def calculate_ratio(self):
         amounts = list()
@@ -88,10 +89,10 @@ class ImageConverter:
             return 1
         return current_level
 
-    def save_result_image(self, image):
-        path = '../../samples/result.png'
-        image.save(path)
-        return path
+    def save_result_image(self, image, path='../../samples'):
+        directory_path = path
+        image.save(f'{directory_path}/result.png')
+        return directory_path
 
     def paint_pixel(self, image, week, day):
         new_image = image
