@@ -26,12 +26,13 @@ class ImageConversionWindow(QMainWindow):
         self.start_btn = self.findChild(QPushButton, 'start_btn')
 
         self.image_label.mouseReleaseEvent = self.image_select
+        self.directory_label.mouseReleaseEvent = self.directory_select
 
         self.calendarWidget.clicked['QDate'].connect(self.date_select)
 
         self.date = None
         self.image_path = None
-
+        self.directory = None
 
     def set_image(self, filename, label_name):
         pixmap = QPixmap(filename).scaled(459, 63)
@@ -74,3 +75,9 @@ class ImageConversionWindow(QMainWindow):
         if self.make_image_result() == 'White image':
             self.error_white_image()
 
+    def directory_select(self, event):
+        dialog = QFileDialog(self)
+        directory = dialog.getExistingDirectory(self, 'Select the directory', '.')
+        if directory:
+            self.directory = directory
+            self.directory_label.setText(directory)
