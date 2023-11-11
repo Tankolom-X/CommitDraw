@@ -437,6 +437,31 @@ font: 14pt &quot;Terminal&quot;;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>150</y>
+      <width>531</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(87, 241, 123);
+font: 14pt &quot;Terminal&quot;;
+background-color: rgb(32, 37, 44);
+color: rgb(57, 211, 83);
+border: 5px solid;
+border-color: rgb(57, 211, 83);
+border-radius: 5px;</string>
+    </property>
+    <property name="text">
+     <string>Please wait, conversion is in progress</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>line</zorder>
    <zorder>previous_settings_btn</zorder>
    <zorder>image_label</zorder>
@@ -452,6 +477,7 @@ font: 14pt &quot;Terminal&quot;;</string>
    <zorder>text_image_label</zorder>
    <zorder>text_result_label_2</zorder>
    <zorder>image_result_label</zorder>
+   <zorder>label</zorder>
   </widget>
  </widget>
  <resources/>
